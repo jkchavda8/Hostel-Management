@@ -1,0 +1,27 @@
+﻿@model IEnumerable<Hostel_Management.Models.LeaveRequest>
+
+@{
+    ViewData["Title"] = "My Leave Requests";
+}
+
+<h1>My Leave Requests</h1>
+
+<div>
+    @if (Model != null && Model.Any())
+    {
+        <ul>
+            @foreach (var leaveRequest in Model)
+            {
+                <li>
+                    Start Date: @leaveRequest.StartDate.ToShortDateString(),
+                    End Date: @leaveRequest.EndDate.ToShortDateString(),
+                    Status: @(leaveRequest.ApprovedByAdmin ? "Approved" : "Pending")
+                </li>
+            }
+        </ul>
+    }
+    else
+    {
+        <p>No leave requests found.</p>
+    }
+</div>
