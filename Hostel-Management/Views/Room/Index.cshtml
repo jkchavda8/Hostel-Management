@@ -1,71 +1,64 @@
 ﻿@model IEnumerable<Hostel_Management.Models.Room>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Room Management";
 }
 
-<h1>Index</h1>
+<div class="container mt-5">
+    <h1 class="text-center">Room Management</h1>
 
-<p>
-    <a asp-action="Add">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.RoomNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Capacity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NumberOfBeds)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NumberOfFans)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NumberOfTables)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NumberOfChairs)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsOccupied)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.RoomNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Capacity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumberOfBeds)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumberOfFans)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumberOfTables)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumberOfChairs)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsOccupied)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.RoomID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.RoomID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.RoomID">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <div class="card shadow-lg">
+        <div class="card-header bg-primary text-white text-center">
+            <h4>Room List</h4>
+        </div>
+        <div class="card-body">
+            <p>
+                <a asp-action="Add" class="btn btn-success">Create New Room</a>
+            </p>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.RoomNumber)</th>
+                        <th>@Html.DisplayNameFor(model => model.Capacity)</th>
+                        <th>@Html.DisplayNameFor(model => model.NumberOfBeds)</th>
+                        <th>@Html.DisplayNameFor(model => model.NumberOfFans)</th>
+                        <th>@Html.DisplayNameFor(model => model.NumberOfTables)</th>
+                        <th>@Html.DisplayNameFor(model => model.NumberOfChairs)</th>
+                        <th>@Html.DisplayNameFor(model => model.IsOccupied)</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.RoomNumber)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Capacity)</td>
+                            <td>@Html.DisplayFor(modelItem => item.NumberOfBeds)</td>
+                            <td>@Html.DisplayFor(modelItem => item.NumberOfFans)</td>
+                            <td>@Html.DisplayFor(modelItem => item.NumberOfTables)</td>
+                            <td>@Html.DisplayFor(modelItem => item.NumberOfChairs)</td>
+                            <td>@Html.DisplayFor(modelItem => item.IsOccupied)</td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.RoomID" class="btn btn-warning btn-sm">Edit</a>
+                                <a asp-action="Details" asp-route-id="@item.RoomID" class="btn btn-info btn-sm">Details</a>
+                                <a asp-action="Delete" asp-route-id="@item.RoomID" class="btn btn-danger btn-sm">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
+        <a asp-controller="Admin" asp-action="Index" class="btn btn-secondary">Back to Dashboard</a>
+    </div>
+</div>
+
+<!-- Optional styling -->
+<style>
+    .table th, .table td {
+        vertical-align: middle;
+    }
+</style>

@@ -1,0 +1,36 @@
+﻿@using Microsoft.AspNetCore.Http
+@model IEnumerable<Hostel_Management.Models.FeeHistory>
+
+@{
+    ViewData["Title"] = "Fee History";
+    var isAdminLoggedIn = Context.Session.GetString("AdminEmail") != null;
+}
+
+<h1>Fee History for Student</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Amount Paid</th>
+            <th>Date Paid</th>
+            <th>Payment Method</th>
+            <th>Year</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var fee in Model)
+        {
+            <tr>
+                <td>@fee.AmountPaid</td>
+                <td>@fee.DatePaid.ToShortDateString()</td>
+                <td>@fee.PaymentMethod</td>
+                <td>@fee.year</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (isAdminLoggedIn)
+{
+    <a asp-controller="FeeHistory" asp-action="Create" asp-route-studentId="@ViewBag.StudentId" class="btn btn-success">Add Fee</a>
+}

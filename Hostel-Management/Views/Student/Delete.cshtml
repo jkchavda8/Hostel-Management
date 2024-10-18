@@ -4,48 +4,50 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Delete</h1>
+<div class="container mt-5">
+    <h1 class="text-center">Delete</h1>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Student</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DOB)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DOB)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.EntryDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.EntryDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IsAdmitted)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IsAdmitted)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Room)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Room.RoomID)
-        </dd class>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="StudentID" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
-    </form>
+    <h3 class="text-center">Are you sure you want to delete this?</h3>
+    <div class="shadow p-4 rounded bg-light">
+        <h4>Student</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.DOB)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.DOB)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.EntryDate)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.EntryDate)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.IsAdmitted)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.IsAdmitted)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Room)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Room.RoomID)
+            </dd>
+        </dl>
+
+        <form asp-action="Delete" class="text-center">
+            <input type="hidden" asp-for="StudentID" />
+            <button type="submit" class="btn btn-danger">Delete</button>
+            <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+        </form>
+    </div>
 </div>

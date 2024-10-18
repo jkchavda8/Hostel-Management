@@ -4,28 +4,43 @@
     ViewData["Title"] = "Request Leave";
 }
 
-<h2>Request Leave</h2>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg">
+                <div class="card-header bg-primary text-white text-center">
+                    <h3>Request Leave</h3>
+                </div>
+                <div class="card-body">
+                    <form asp-action="CreateLeaveRequest" method="post">
+                        <div class="form-group mb-3">
+                            <label asp-for="StartDate" class="control-label"></label>
+                            <input asp-for="StartDate" class="form-control" type="date" />
+                            <span asp-validation-for="StartDate" class="text-danger"></span>
+                        </div>
 
-<form asp-action="CreateLeaveRequest" method="post">
-    <div class="form-group">
-        <label asp-for="StartDate"></label>
-        <input asp-for="StartDate" class="form-control" type="date" />
-        <span asp-validation-for="StartDate" class="text-danger"></span>
-    </div>
+                        <div class="form-group mb-3">
+                            <label asp-for="EndDate" class="control-label"></label>
+                            <input asp-for="EndDate" class="form-control" type="date" />
+                            <span asp-validation-for="EndDate" class="text-danger"></span>
+                        </div>
 
-    <div class="form-group">
-        <label asp-for="EndDate"></label>
-        <input asp-for="EndDate" class="form-control" type="date" />
-        <span asp-validation-for="EndDate" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="reason"></label>
-        <textarea asp-for="reason" class="form-control"></textarea>
-        <span asp-validation-for="reason" class="text-danger"></span>
-    </div>
+                        <div class="form-group mb-3">
+                            <label asp-for="reason" class="control-label"></label>
+                            <textarea asp-for="reason" class="form-control" rows="4" placeholder="Enter the reason for leave..."></textarea>
+                            <span asp-validation-for="reason" class="text-danger"></span>
+                        </div>
 
-    <button type="submit" class="btn btn-primary">Submit Leave Request</button>
-</form>
+                        <button type="submit" class="btn btn-primary">Submit Leave Request</button>
+                        <br />
+                        <a asp-action="Details" asp-controller="Student" asp-route-id="@Model.StudentID" class="btn btn-secondary mt-3">Back</a> 
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

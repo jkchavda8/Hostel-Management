@@ -1,59 +1,66 @@
 ﻿@model IEnumerable<Hostel_Management.Models.Student>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Student Index";
 }
 
-<h1>Index</h1>
+<div class="container mt-5">
+    <h1 class="text-center">Student Index</h1>
 
-<p>
-    <a asp-action="Register">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DOB)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EntryDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsAdmitted)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Room)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DOB)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EntryDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsAdmitted)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Room.RoomID)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.StudentID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.StudentID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.StudentID">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <p class="text-end">
+        <a asp-action="Register" class="btn btn-primary">Create New</a>
+    </p>
+    <table class="table table-bordered table-striped">
+        <thead class="table-light">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().Name) <!-- Assuming First() to avoid null reference -->
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().DOB)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().EntryDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().IsAdmitted)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().Room)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DOB)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EntryDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsAdmitted)
+                    </td>
+                    <td>
+                        @Html.DisplayNameFor(model => model.Room)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.StudentID" class="btn btn-warning btn-sm">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.StudentID" class="btn btn-info btn-sm">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.StudentID" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="text-center">
+        <a asp-controller="Admin" asp-action="Index" class="btn btn-secondary">Back to List</a>
+    </div>
+</div>

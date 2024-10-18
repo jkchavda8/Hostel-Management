@@ -1,4 +1,5 @@
 using Hostel_Management.Models;
+using Hostel_Management.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -29,6 +30,7 @@ namespace Hostel_Management
             services.AddScoped<IRoom, RoomRepository>();
             services.AddScoped<IStudent, StudentRepository>();
             services.AddScoped<ILeaveRequest, LeaveRequestRepository>();
+            services.AddScoped<IFeeHistory, FeeHistoryRepository>();
             services.AddSession(options =>
             {
                 options.IdleTimeout = TimeSpan.FromMinutes(30);

@@ -2,29 +2,54 @@
     ViewData["Title"] = "Admin Dashboard";
 }
 
-<h2>Admin Dashboard</h2>
+<div class="container mt-5">
+    <h2 class="text-center">Admin Dashboard</h2>
 
-<div class="admin-dashboard">
-    <div class="row">
-        <!-- Button for Room Management -->
-        <div class="col-md-4">
-            <a href="@Url.Action("Index", "Room")" class="btn btn-primary btn-lg btn-block">
-                Manage Rooms
-            </a>
-        </div>
+    <div class="admin-dashboard">
+        <div class="row">
+            <!-- Button for Room Management -->
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <a href="@Url.Action("Index", "Room")" class="btn btn-primary btn-lg btn-block">
+                            Manage Rooms
+                        </a>
+                    </div>
+                </div>
+            </div>
 
-        <!-- Button for Student Management -->
-        <div class="col-md-4">
-            <a href="@Url.Action("Index", "Student")" class="btn btn-success btn-lg btn-block">
-                Manage Students
-            </a>
-        </div>
+            <!-- Button for Student Management -->
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <a href="@Url.Action("Index", "Student")" class="btn btn-success btn-lg btn-block">
+                            Manage Students
+                        </a>
+                    </div>
+                </div>
+            </div>
 
-        <!-- Button for Leave Management -->
-        <div class="col-md-4">
-            <a href="@Url.Action("Index", "LeaveRequest")" class="btn btn-info btn-lg btn-block">
-                Manage Leave Details
-            </a>
+            <!-- Button for Leave Management -->
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <a href="@Url.Action("Index", "LeaveRequest")" class="btn btn-info btn-lg btn-block">
+                            Manage Leave Details
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Button for Pending Fees -->
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <a href="@Url.Action("PendingFees", "FeeHistory")" class="btn btn-warning btn-lg btn-block">
+                            View Pending Fees
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -35,9 +60,9 @@
         margin-top: 30px;
     }
 
-        .admin-dashboard .btn {
-            margin-bottom: 20px;
-            padding: 20px;
-            font-size: 18px;
-        }
+    .admin-dashboard .btn {
+        margin-bottom: 20px;
+        padding: 20px;
+        font-size: 18px;
+    }
 </style>

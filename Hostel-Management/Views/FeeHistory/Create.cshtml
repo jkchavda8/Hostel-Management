@@ -1,0 +1,43 @@
+﻿@model Hostel_Management.Models.FeeHistory
+
+@{
+    ViewData["Title"] = "Add Fee";
+}
+
+<div class="container mt-5">
+    <h1 class="text-center">Add Fee</h1>
+
+    <form asp-action="Create" method="post" class="shadow p-4 rounded bg-light">
+        <div class="form-group">
+            <label asp-for="AmountPaid" class="control-label"></label>
+            <input asp-for="AmountPaid" class="form-control" placeholder="Enter amount" />
+            <span asp-validation-for="AmountPaid" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="DatePaid" class="control-label"></label>
+            <input asp-for="DatePaid" class="form-control" type="date" />
+            <span asp-validation-for="DatePaid" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="PaymentMethod" class="control-label"></label>
+            <input asp-for="PaymentMethod" class="form-control" placeholder="Enter payment method" />
+            <span asp-validation-for="PaymentMethod" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="year" class="control-label"></label>
+            <input asp-for="year" class="form-control" placeholder="Enter year" />
+            <span asp-validation-for="year" class="text-danger"></span>
+        </div>
+        <input type="hidden" asp-for="StudentID" value="@ViewBag.StudentId" />
+
+        <div class="form-group text-end">
+            <button type="submit" class="btn btn-primary">Add Fee</button>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

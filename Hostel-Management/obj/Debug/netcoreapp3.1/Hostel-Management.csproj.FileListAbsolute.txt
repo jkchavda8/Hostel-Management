@@ -169,3 +169,8 @@ C:\Users\91968\source\repos\Hostel-Management\Hostel-Management\obj\Debug\netcor
 C:\Users\91968\source\repos\Hostel-Management\Hostel-Management\obj\Debug\netcoreapp3.1\Razor\Views\LeaveRequest\Delete.cshtml.g.cs
 C:\Users\91968\source\repos\Hostel-Management\Hostel-Management\obj\Debug\netcoreapp3.1\Razor\Views\LeaveRequest\Edit.cshtml.g.cs
 C:\Users\91968\source\repos\Hostel-Management\Hostel-Management\obj\Debug\netcoreapp3.1\Razor\Views\LeaveRequest\MyLeaveRequest.cshtml.g.cs
+C:\Users\91968\source\repos\Hostel-Management\Hostel-Management\obj\Debug\netcoreapp3.1\Hostel-Management.sourcelink.json
+C:\Users\91968\source\repos\Hostel-Management\Hostel-Management\obj\Debug\netcoreapp3.1\Razor\Views\FeeHistory\Create.cshtml.g.cs
+C:\Users\91968\source\repos\Hostel-Management\Hostel-Management\obj\Debug\netcoreapp3.1\Razor\Views\FeeHistory\Index.cshtml.g.cs
+C:\Users\91968\source\repos\Hostel-Management\Hostel-Management\obj\Debug\netcoreapp3.1\Razor\Views\FeeHistory\PendingFees.cshtml.g.cs
+C:\Users\91968\source\repos\Hostel-Management\Hostel-Management\obj\Debug\netcoreapp3.1\Razor\Views\FeeHistory\Details.cshtml.g.cs

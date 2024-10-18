@@ -4,24 +4,37 @@
     ViewData["Title"] = "My Leave Requests";
 }
 
-<h1>My Leave Requests</h1>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg">
+                <div class="card-header bg-primary text-white text-center">
+                    <h3>My Leave Requests</h3>
+                </div>
+                <div class="card-body">
+                    @if (Model != null && Model.Any())
+                    {
+                        <ul class="list-group">
+                            @foreach (var leaveRequest in Model)
+                            {
+                                <li class="list-group-item">
+                                    <strong>Start Date:</strong> @leaveRequest.StartDate.ToShortDateString(),
+                                    <strong>End Date:</strong> @leaveRequest.EndDate.ToShortDateString(),
+                                    <strong>Status:</strong> @(leaveRequest.ApprovedByAdmin ? "Approved" : "Pending")
+                                </li>
+                            }
+                        </ul>
+                    }
+                    else
+                    {
+                        <p>No leave requests found.</p>
+                    }
 
-<div>
-    @if (Model != null && Model.Any())
-    {
-        <ul>
-            @foreach (var leaveRequest in Model)
-            {
-                <li>
-                    Start Date: @leaveRequest.StartDate.ToShortDateString(),
-                    End Date: @leaveRequest.EndDate.ToShortDateString(),
-                    Status: @(leaveRequest.ApprovedByAdmin ? "Approved" : "Pending")
-                </li>
-            }
-        </ul>
-    }
-    else
-    {
-        <p>No leave requests found.</p>
-    }
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
+                        <a asp-action="Details" asp-controller="Student" asp-route-id="@ViewBag.StudentID" class="btn btn-secondary mt-3">Back</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

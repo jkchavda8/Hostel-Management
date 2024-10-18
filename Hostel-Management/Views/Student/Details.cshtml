@@ -5,54 +5,93 @@
     ViewData["Title"] = "Details";
     var isAdminLoggedIn = Context.Session.GetString("AdminEmail") != null; // Check if admin is logged in
     var studentIdString = Context.Session.GetString("StudentID"); // Get the student ID from session
+    bool isFeePending = (bool)ViewBag.IsFeePending;
 }
 
-<h1>Details</h1>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg">
+                <div class="card-header bg-primary text-white text-center">
+                    <h3>Student Details</h3>
+                </div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-4">
+                            @Html.DisplayNameFor(model => model.Name)
+                        </dt>
+                        <dd class="col-sm-8">
+                            @Html.DisplayFor(model => model.Name)
+                        </dd>
 
-<div>
-    <h4>Student</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.DOB)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.DOB)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.EntryDate)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.EntryDate)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.IsAdmitted)
-        </dt>
-        <dd class="col-sm-10">
-            @(Model.IsAdmitted ? "True" : "False")
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayName("Room Number")
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Room.RoomID)
-        </dd>
-    </dl>
+                        <dt class="col-sm-4">
+                            @Html.DisplayNameFor(model => model.DOB)
+                        </dt>
+                        <dd class="col-sm-8">
+                            @Html.DisplayFor(model => model.DOB)
+                        </dd>
 
-    @if (!isAdminLoggedIn) // Check if admin is not logged in
-    {
-        <div>
-            <a asp-controller="LeaveRequest" asp-action="RequestLeave" asp-route-id="@Model.StudentID" class="btn btn-info">Request Leave</a>
-            <a asp-controller="LeaveRequest" asp-action="MyLeaveRequest" class="btn btn-primary">View My Leave Requests</a> <!-- New button -->
+                        <dt class="col-sm-4">
+                            @Html.DisplayNameFor(model => model.EntryDate)
+                        </dt>
+                        <dd class="col-sm-8">
+                            @Html.DisplayFor(model => model.EntryDate)
+                        </dd>
 
+                        <dt class="col-sm-4">
+                            @Html.DisplayNameFor(model => model.IsAdmitted)
+                        </dt>
+                        <dd class="col-sm-8">
+                            @(Model.IsAdmitted ? "Admitted" : "Not Admitted")
+                        </dd>
+
+                        <dt class="col-sm-4">
+                            Room Number
+                        </dt>
+                        <dd class="col-sm-8">
+                            @Html.DisplayFor(model => model.Room.RoomID)
+                        </dd>
+
+                        <dt class="col-sm-4">
+                            Fee Status for Current Year
+                        </dt>
+                        <dd class="col-sm-8">
+                            @if (isFeePending)
+                            {
+                                    <span class="text-danger">Fee Pending</span>
+                            }
+                            else
+                            {
+                                    <span class="text-success">Fee Completed</span>
+                            }
+                        </dd>
+                    </dl>
+
+                    @if (!isAdminLoggedIn)
+                    {
+                        if (!Model.IsAdmitted)
+                        {
+                                    <div class="alert alert-warning">
+                                        Your request is not accepted. Please contact administration for more details.
+                                    </div>
+                        }
+                        else
+                        {
+                                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                        <a asp-controller="LeaveRequest" asp-action="RequestLeave" asp-route-id="@Model.StudentID" class="btn btn-info">Request Leave</a>
+                                        &nbsp;
+                                        <a asp-controller="LeaveRequest" asp-action="MyLeaveRequest" class="btn btn-primary">View My Leave Requests</a>
+                                    </div>
+                        }
+                    }
+                    else
+                    {
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <a asp-controller="FeeHistory" asp-action="Index" asp-route-studentId="@Model.StudentID" class="btn btn-warning">View Fee History</a>
+                            </div>
+                    }
+                </div>
+            </div>
         </div>
-
-       
-    }
+    </div>
 </div>

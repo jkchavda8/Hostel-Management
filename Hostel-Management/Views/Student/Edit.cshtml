@@ -4,55 +4,60 @@
     ViewData["Title"] = "Edit Student";
 }
 
-<h1>Edit Student</h1>
+<div class="container mt-5">
+    <h1 class="text-center">Edit Student</h1>
 
-<h4>Student Details</h4>
-<hr />
-<div class="row">
-    <div class="col-md-6">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="StudentID" />
+    <h4 class="text-center">Student Details</h4>
+    <hr />
 
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <form asp-action="Edit" class="shadow p-4 rounded bg-light">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="StudentID" />
 
-            <div class="form-group">
-                <label asp-for="DOB" class="control-label"></label>
-                <input asp-for="DOB" class="form-control" type="date" /> <!-- Use type="date" for better UX -->
-                <span asp-validation-for="DOB" class="text-danger"></span>
-            </div>
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" placeholder="Enter student's name" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
 
-            <div class="form-group">
-                <label asp-for="EntryDate" class="control-label"></label>
-                <input asp-for="EntryDate" class="form-control" type="date" /> <!-- Use type="date" for better UX -->
-                <span asp-validation-for="EntryDate" class="text-danger"></span>
-            </div>
+                <div class="form-group">
+                    <label asp-for="DOB" class="control-label"></label>
+                    <input asp-for="DOB" class="form-control" type="date" />
+                    <span asp-validation-for="DOB" class="text-danger"></span>
+                </div>
 
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsAdmitted" /> @Html.DisplayNameFor(model => model.IsAdmitted)
-                </label>
-            </div>
+                <div class="form-group">
+                    <label asp-for="EntryDate" class="control-label"></label>
+                    <input asp-for="EntryDate" class="form-control" type="date" />
+                    <span asp-validation-for="EntryDate" class="text-danger"></span>
+                </div>
 
-            <div class="form-group">
-                <label asp-for="RoomID" class="control-label"></label>
-                <select asp-for="RoomID" class="form-control" asp-items="ViewBag.RoomID"></select>
-                <span asp-validation-for="RoomID" class="text-danger"></span>
-            </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IsAdmitted" /> @Html.DisplayNameFor(model => model.IsAdmitted)
+                    </label>
+                </div>
 
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+                <div class="form-group">
+                    <label asp-for="RoomID" class="control-label"></label>
+                    <select asp-for="RoomID" class="form-control" asp-items="ViewBag.RoomID">
+                        <option value="">Select Room</option>
+                    </select>
+                    <span asp-validation-for="RoomID" class="text-danger"></span>
+                </div>
+
+                <div class="form-group text-end">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+    <div class="text-center mt-3">
+        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+    </div>
 </div>
 
 @section Scripts {

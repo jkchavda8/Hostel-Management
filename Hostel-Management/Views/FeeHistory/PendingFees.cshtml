@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Hostel_Management.Models.Student>
+
+@{
+    ViewData["Title"] = "Pending Fees";
+}
+
+<h2>Pending Fees for Current Students</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Student Name</th>
+            <th>Room Number</th>
+            <th>Year</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var student in Model)
+        {
+            <tr>
+                <td>@student.Name</td>
+                <td>@student.Room.RoomID</td>
+                <td>@DateTime.Now.Year</td>
+                <td>
+                    <a asp-controller="FeeHistory" asp-action="Details" asp-route-studentId="@student.StudentID" class="btn btn-info">View Fee History</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

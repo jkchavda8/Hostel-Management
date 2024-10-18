@@ -9,7 +9,7 @@ namespace Hostel_Management.Models
         public decimal AmountPaid { get; set; }   // Amount paid by the student
         public DateTime DatePaid { get; set; }    // Date the fee was paid
         public string PaymentMethod { get; set; } // Payment method (e.g., cash, card)
-
+        public int year { get; set; }
         // Navigation property
         public Student Student { get; set; }
     }

@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Hostel_Management.Models.FeeHistory>
+
+@{
+    ViewData["Title"] = "Fee History";
+    var studentId = ViewBag.StudentId; // Getting the student ID from ViewBag
+}
+
+<h2>Fee History for Student ID: @studentId</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Date Paid</th>
+            <th>Amount Paid</th>
+            <th>Payment Method</th>
+            <th>Year</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var feeHistory in Model)
+            {
+                <tr>
+                    <td>@feeHistory.DatePaid.ToString("dd-MM-yyyy HH:mm:ss")</td> <!-- Formatting date -->
+                    <td>@feeHistory.AmountPaid.ToString("C")</td> <!-- Formatting as currency -->
+                    <td>@feeHistory.PaymentMethod</td>
+                    <td>@feeHistory.year</td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="4" class="text-center text-danger">No fee history found for this student.</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="text-right">
+    <a asp-controller="FeeHistory" asp-action="Create" asp-route-studentId="@studentId" class="btn btn-primary">Add Fee Record</a>
+</div>
+
+

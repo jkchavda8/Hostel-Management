@@ -4,14 +4,16 @@ using Hostel_Management.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Hostel_Management.Migrations
 {
     [DbContext(typeof(HostelContext))]
-    partial class HostelContextModelSnapshot : ModelSnapshot
+    [Migration("20241017132746_fee")]
+    partial class fee
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

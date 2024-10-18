@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -12,11 +13,13 @@ namespace Hostel_Management.Controllers
     {
         private readonly IStudent _studentRepository;
         private readonly IRoom _roomRepository;
+        private readonly IFeeHistory _history;
 
-        public StudentController(IStudent studentRepository,IRoom roomRepository)
+        public StudentController(IStudent studentRepository,IRoom roomRepository, IFeeHistory history)
         {
             _studentRepository = studentRepository;
             _roomRepository = roomRepository;
+            _history = history;
         }
 
         public IActionResult Index()
@@ -63,6 +66,18 @@ namespace Hostel_Management.Controllers
             {
                 return NotFound();
             }
+            var currentYear = DateTime.Now.Year;
+
+            // Check if the student has any fee history for the current year
+            var currentYearFeeHistory = _history.GetAllFeeHistories()
+                                                .Where(f => f.StudentID == id && f.year == currentYear)
+                                                .ToList();
+
+            // If no fee history for the current year, the fee is pending
+            bool isFeePending = !currentYearFeeHistory.Any();
+
+            // Pass fee status to the view
+            ViewBag.IsFeePending = isFeePending;
             return View(student);
         }
         public IActionResult Add()

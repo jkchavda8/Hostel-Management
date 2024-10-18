@@ -160,6 +160,7 @@ namespace Hostel_Management.Controllers
                 var leaveRequests = _leaveRequestRepository.GetAllLeaveRequests()
                     .Where(lr => lr.StudentID == studentId) // Filter by student ID
                     .ToList();
+                ViewBag.StudentID = studentId;
 
                 return View(leaveRequests); // Pass leave requests to the view
             }
