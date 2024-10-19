@@ -71,7 +71,7 @@ Before running the project, make sure you have the following installed:
    
 6. **Run the Application**
   Now, you can run the application using the command:
-```bash
+   ```bash
     dotnet run
   
 ### Running the Application
