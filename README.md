@@ -59,16 +59,19 @@ Before running the project, make sure you have the following installed:
 2. **Configure the Database**
   Open the project in your preferred IDE.
    In the appsettings.json file, configure the connection string for your database:
+   ```json
       "ConnectionStrings": {
         "DefaultConnection": "Server=your_server_name;Database=HostelManagementDB;Trusted_Connection=True;MultipleActiveResultSets=true"
       }
    
 4. **Run Database Migrations**
     After configuring the database connection string, open the terminal in your IDE and run the following commands to create the database and apply migrations:
+   ```bash
      dotnet ef database update
    
 6. **Run the Application**
   Now, you can run the application using the command:
+```bash
     dotnet run
   
 ### Running the Application
@@ -96,10 +99,14 @@ Before running the project, make sure you have the following installed:
 ## The project follows the ASP.NET MVC pattern:
 
 **Models** : Contains the data structure of entities like Student, LeaveRequest, Room, etc.
+
 **Views** : Contains the Razor pages (HTML) to display the user interface.
+
 **Controllers**: Handles the business logic and routes requests between the model and views.
 
 ## Future Enhancements
 **Notifications**: Add notifications for students regarding leave request status.
+
 **Reports**: Generate reports of student data and room assignments for hostel administrators.
+
 **Mobile Integration**: Create a mobile-friendly version or mobile app for easier access.
