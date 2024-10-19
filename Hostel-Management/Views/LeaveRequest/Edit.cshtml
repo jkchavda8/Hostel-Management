@@ -13,6 +13,8 @@
     <div class="row">
         <div class="col-md-12">
             <form asp-action="Edit">
+                <input type="hidden" asp-for="LeaveRequestID" />
+                <input type="hidden" asp-for="ApprovedByAdmin" />
                 <div class="form-group">
                     <label asp-for="StudentID" class="control-label"></label>
                     <input asp-for="StudentID" class="form-control" readonly />

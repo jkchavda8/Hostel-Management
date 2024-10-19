@@ -26,7 +26,7 @@
                     @Html.DisplayNameFor(model => model.First().IsAdmitted)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.First().Room)
+                    @Html.DisplayNameFor(model => model.First().Room.RoomNumber)
                 </th>
                 <th></th>
             </tr>
@@ -48,7 +48,7 @@
                         @Html.DisplayFor(modelItem => item.IsAdmitted)
                     </td>
                     <td>
-                        @Html.DisplayNameFor(model => model.Room)
+                        @Html.DisplayFor(modelItem => item.Room.RoomNumber)
                     </td>
                     <td>
                         <a asp-action="Edit" asp-route-id="@item.StudentID" class="btn btn-warning btn-sm">Edit</a> |

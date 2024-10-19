@@ -78,6 +78,10 @@ namespace Hostel_Management.Controllers
 
             // Pass fee status to the view
             ViewBag.IsFeePending = isFeePending;
+
+            var roomDetails = _roomRepository.GetRoomById(student.RoomID); // Ensure this method is available
+            ViewBag.RoomDetails = roomDetails;
+
             return View(student);
         }
         public IActionResult Add()
@@ -110,7 +114,7 @@ namespace Hostel_Management.Controllers
             var rooms = _roomRepository.GetAvailableRooms().Select(r => new SelectListItem
             {
                 Value = r.RoomID.ToString(),
-                Text = r.Capacity.ToString(),
+                Text = $"{r.RoomNumber} - Capacity: {r.Capacity}, Beds: {r.NumberOfBeds}, Fans: {r.NumberOfFans}, Tables: {r.NumberOfTables}, Chairs: {r.NumberOfChairs}"
             }).ToList();
 
             ViewBag.RoomID = new SelectList(rooms, "Value", "Text");
@@ -162,9 +166,20 @@ namespace Hostel_Management.Controllers
             {
                 return NotFound();
             }
-            ViewBag.RoomID = new SelectList(_roomRepository.GetAllRooms(), "RoomID", "Capacity"); // Adjust as necessary
+
+            // Create a list of SelectListItem with detailed room information
+            var availableRooms = _roomRepository.GetAvailableRooms().Select(r => new SelectListItem
+            {
+                Value = r.RoomID.ToString(),
+                Text = $"{r.RoomNumber} - Capacity: {r.Capacity}, Beds: {r.NumberOfBeds}, Fans: {r.NumberOfFans}, Tables: {r.NumberOfTables}, Chairs: {r.NumberOfChairs}"
+            }).ToList();
+
+            ViewBag.RoomID = new SelectList(availableRooms, "Value", "Text", student.RoomID);
+            var roomDetails = _roomRepository.GetRoomById(student.RoomID); // Ensure this method is available
+            ViewBag.RoomDetails = roomDetails;
             return View(student);
         }
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -172,9 +187,61 @@ namespace Hostel_Management.Controllers
         {
             if (ModelState.IsValid)
             {
-                _studentRepository.UpdateStudent(student); // Ensure this method exists in your repository
+                // Fetch the current student record from the database
+                var currentStudent = _studentRepository.GetStudentById(student.StudentID);
+
+                if (currentStudent == null)
+                {
+                    return NotFound();
+                }
+
+                // Check if the room has changed
+                if (currentStudent.RoomID != student.RoomID)
+                {
+                    // Fetch the old room
+                    var oldRoom = _roomRepository.GetRoomById(currentStudent.RoomID);
+                    if (oldRoom != null)
+                    {
+                        // Remove the student from the old room's student collection
+                        oldRoom.Students.Remove(currentStudent);
+
+                        // Update the occupancy status of the old room
+                        oldRoom.IsOccupied = oldRoom.Students.Count >= oldRoom.Capacity;
+
+                        // Save the changes to the old room
+                        _roomRepository.UpdateRoom(oldRoom);
+                    }
+
+                    // Fetch the new room
+                    var newRoom = _roomRepository.GetRoomById(student.RoomID);
+                    if (newRoom != null)
+                    {
+                        // Add the student to the new room's student collection
+                        newRoom.Students.Add(currentStudent); // Use the currentStudent here, not the "student" from the form
+
+                        // Update the occupancy status of the new room
+                        newRoom.IsOccupied = newRoom.Students.Count >= newRoom.Capacity;
+
+                        // Save the changes to the new room
+                        _roomRepository.UpdateRoom(newRoom);
+                    }
+                }
+
+                // Update the student's other details except RoomID (if room has changed, it was already handled)
+                currentStudent.Name = student.Name;
+                currentStudent.Email = student.Email;
+                currentStudent.Password = student.Password;
+                currentStudent.DOB = student.DOB;
+                currentStudent.EntryDate = student.EntryDate;
+                currentStudent.RoomID = student.RoomID;
+                currentStudent.IsAdmitted = student.IsAdmitted;
+
+                _studentRepository.UpdateStudent(currentStudent);
+
                 return RedirectToAction("Index");
             }
+
+            // If model state is invalid, reload the rooms list for the dropdown and return the view
             ViewBag.RoomID = new SelectList(_roomRepository.GetAllRooms(), "RoomID", "Capacity", student.RoomID);
             return View(student);
         }
@@ -205,5 +272,12 @@ namespace Hostel_Management.Controllers
             var feeHistory = _studentRepository.GetFeeHistoryByStudentId(id);
             return View(feeHistory);
         }
+
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear(); // Clear the session
+            return RedirectToAction("Index", "Home"); // Redirect to home page or login page
+        }
+
     }
 }

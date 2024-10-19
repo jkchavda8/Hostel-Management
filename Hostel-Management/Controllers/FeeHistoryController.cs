@@ -65,20 +65,24 @@ namespace Hostel_Management.Controllers
             var currentYear = DateTime.Now.Year;
 
             // Fetch all students
-            var allStudents = _studentRepository.GetAllStudents().ToList(); // Load all students into memory
+            var allStudents = _studentRepository.GetAllStudents().ToList();
 
-            // Fetch all students who have paid fees for the current year
-            var studentsWithPaidFees = _feeHistoryRepository.GetAllFeeHistories()
-                .Where(f => f.DatePaid.Year == currentYear)
-                .Select(f => f.StudentID)
-                .ToList();
+            // Fetch fee histories for all students
+            var allFeeHistories = _feeHistoryRepository.GetAllFeeHistories().ToList();
 
-            // Filter students who do not have any paid fees for the current year
+            // Students who have paid for the current year
+            var studentsWithCurrentYearFees = allFeeHistories
+                                                .Where(f => f.year == currentYear)
+                                                .Select(f => f.StudentID)
+                                                .ToList();
+
+            // Get students who have paid in any previous year but not this year
             var studentsWithPendingFees = allStudents
-                .Where(s => !studentsWithPaidFees.Contains(s.StudentID))
+                .Where(s => !studentsWithCurrentYearFees.Contains(s.StudentID))
                 .ToList();
 
             return View(studentsWithPendingFees);
         }
+
     }
 }

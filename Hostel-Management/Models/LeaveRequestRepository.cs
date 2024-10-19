@@ -55,9 +55,21 @@ namespace Hostel_Management.Models
 
         public void UpdateLeaveRequest(LeaveRequest leaveRequest)
         {
-            _context.LeaveRequests.Update(leaveRequest);
-            _context.SaveChanges();
-            //return leaveRequest;
+            // Check if the LeaveRequest exists
+            var existingLeaveRequest = _context.LeaveRequests.AsNoTracking()
+                                            .FirstOrDefault(lr => lr.LeaveRequestID == leaveRequest.LeaveRequestID);
+
+            if (existingLeaveRequest != null)
+            {
+                // Mark the entity as modified
+                _context.Entry(leaveRequest).State = EntityState.Modified;
+                _context.SaveChanges();
+            }
+            else
+            {
+                throw new KeyNotFoundException($"Leave request with ID {leaveRequest.LeaveRequestID} not found.");
+            }
         }
+
     }
 }

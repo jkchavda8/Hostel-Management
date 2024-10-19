@@ -46,11 +46,23 @@
                         </dd>
 
                         <dt class="col-sm-4">
-                            Room Number
+                            Room Details
                         </dt>
                         <dd class="col-sm-8">
-                            @Html.DisplayFor(model => model.Room.RoomID)
+                            @if (ViewBag.RoomDetails != null)
+                            {
+                                var room = ViewBag.RoomDetails; // Get the room details from ViewBag
+                                <div>
+                                    Room Number: @room.RoomNumber <br />
+                                    Capacity: @room.Capacity, <br />
+                                    Beds: @room.NumberOfBeds, <br />
+                                    Fans: @room.NumberOfFans, <br />
+                                    Tables: @room.NumberOfTables, <br />
+                                    Chairs: @room.NumberOfChairs
+                                </div>
+                            }
                         </dd>
+
 
                         <dt class="col-sm-4">
                             Fee Status for Current Year
